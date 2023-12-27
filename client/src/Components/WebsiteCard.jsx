@@ -6,6 +6,8 @@ import Loader from "./Loader";
 const WebsiteCard = (props) => {
   const i = props.i;
   const [deletingWebsite, setDeletingWebsite] = useState("");
+  const [updatingWebsite, setUpdatingWebsite] = useState("");
+  
   const deleteWebsite = async (id) => {
     if (deletingWebsite) return;
 
@@ -29,14 +31,38 @@ const WebsiteCard = (props) => {
 
     props.fetchWeb();
   };
+  const ToggleMonitor = async (id,isMonitoring) => {
+    if (updatingWebsite) return;
 
+    const rawToken = localStorage.getItem("tokens");
+    const tokens = JSON.parse(rawToken);
+    const accessToken = tokens.accessToken.token;
+
+    setUpdatingWebsite(id);
+    const res = await fetch(
+      `${import.meta.env.VITE_API_URL}/website/update?webId=${id}&isMonitoring=${!isMonitoring?"true":"false"}`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: accessToken,
+        },
+      }
+    ).catch((err) => void err);
+    setUpdatingWebsite("");
+
+    if (!res) return;
+
+    props.fetchWeb();
+  };
+  console.log(i);
   return (
     <div
       key={i._id}
       className=" hover:bg-gray-100 border-2 border-gray-200  rounded-lg pt-1.5  max-w-[100vh] "
     >
-      <div className="px-4 break-all">{i.url}</div>
-      <div className="px-4 py-1 text-md ">
+      <div className="px-4 break-all">{i.url.slice(0,100)+"..."}</div>
+      {i.isMonitoring?"":<button className=" text-white font-medium text-xs bg-red-600 px-1.5 rounded-lg cursor-default ml-2  py-0.5">MONITORING OFF</button>}
+      {i.isMonitoring?<div className="px-4 py-1 text-md ">
         STATUS :
         {i.isActive ? (
           <button className="text-white text-xs font-medium bg-green-600 px-3 cursor-default rounded-lg ml-2  py-0.5">
@@ -49,7 +75,7 @@ const WebsiteCard = (props) => {
             INACTIVE
           </button>
         )}
-      </div>
+      </div>:""}
       <div className="px-4 flex flex-row gap-3 relative pt-1 pb-4 ">
         {/* delete button */}
 
@@ -84,8 +110,14 @@ const WebsiteCard = (props) => {
           )}
         </div>
 
-        <div>
-          <svg
+        
+          {/* update monitor status button */}
+        <div  
+        onClick={() => {
+            ToggleMonitor(i._id,i.isMonitoring);
+          }}>
+
+          {!(updatingWebsite===i._id)?<> <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -101,8 +133,9 @@ const WebsiteCard = (props) => {
           </svg>
 
           <div className="bg-black absolute -bottom-1  text-[12px]  hidden peer-hover:flex rounded-md px-2 text-white">
-            Stop
-          </div>
+            {i.isMonitoring?"Stop":"Start"}
+          </div></>:<Loader text={"Updating"} />}
+         
         </div>
       </div>
     </div>

@@ -99,6 +99,36 @@ const deleteWebsite = async (req, res) => {
       });
     });
 };
+
+const toggleMonitor = async (req, res) => {
+  const id  = req.query.webId;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(422).json({
+      status: false,
+      message: 'Invalid webId',
+    });
+  }
+
+
+  await websiteSchema.findOneAndUpdate(
+    { _id: id },
+    { $set: {isMonitoring: req.query.isMonitoring=="false"?false:true} },
+    { new: true }
+   ).then((website) => {
+      res.status(200).json({
+        status: true,
+        message: "Updated Monitoring status",
+        data: website,
+      });
+    })
+    .catch((e) => {
+      res.status(422).json({
+        status: false,
+        message: "error toggling monitoring status",
+      });
+    });
+};
+
 const getAllWebsites = async (req, res) => {
   const response = await websiteSchema
     .find({ userId: req.user._id }).populate(
@@ -124,5 +154,6 @@ const getAllWebsites = async (req, res) => {
 module.exports = {
   createWebsite,
   deleteWebsite,
-  getAllWebsites
+  getAllWebsites,
+  toggleMonitor
 };

@@ -55,7 +55,7 @@ const Header = (props) => {
 
   return (
     <>
-      <div className=" bg-indigo-700  rounded-lg mt-1 mb-2 text-white text-center py-2  px-2 border  font-semibold flex justify-between items-center">
+      <div className=" bg-gray-200  rounded-lg mt-1 mb-2 text-white text-center py-2  px-2 border  font-semibold flex justify-between items-center">
         <div>
           <form onSubmit={addWebsite} id="">
             <div className=" flex gap-1 text-sm font-normal">
@@ -73,7 +73,7 @@ const Header = (props) => {
               />
 
               {!submitButtonDisabled ? (
-                <button className=" font-bold text-center text-lg group bg-green-500 hover:bg-green-600 py-1.5 cursor-pointer px-2 rounded-md ">
+                <button className=" font-bold text-center text-lg group bg-green-500 hover:bg-green-600 py-1 cursor-pointer px-2 rounded-md ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -98,7 +98,7 @@ const Header = (props) => {
 
         <button
           onClick={handleLogout}
-          className="bg-red-600 justify-center items-center gap-1 flex py-1 text-sm px-2 rounded-md font-normal"
+          className="bg-red-500 border justify-center items-center gap-1 flex py-1.5  text-sm px-2 rounded-md font-normal"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -114,7 +114,7 @@ const Header = (props) => {
               d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
             />
           </svg>
-          <span className="font-semibold">LOGOUT</span>
+          <span className="font-semibold hidden md:block">LOGOUT</span>
         </button>
       </div>
 

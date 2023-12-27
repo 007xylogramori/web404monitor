@@ -1,4 +1,3 @@
-
 # Web-404-Monitor
 
 Web404Monitor is a hassle-free website monitoring system that allows you to effortlessly keep tabs on the health of your websites. Simply log the URLs of the websites you want to monitor, sit back, and let Web404Monitor do the rest. No more worrying about downtime – Web404Monitor has got your back!
@@ -13,7 +12,7 @@ Web404Monitor is a hassle-free website monitoring system that allows you to effo
 
 **Client:**  React, Redux, TailwindCSS , React Router
 
-**Server:** Node, Express , MongoDB , JWT , OAUTH 2.0
+**Server:** Node, Express , MongoDB , JWT , OAUTH 2.0 , Mongoose(ORM)
 
 
 ## Run Locally
@@ -23,7 +22,7 @@ Clone the project
 
 
 ```bash
-  git clone https://link-to-project
+  git clone (https://github.com/007xylogramori/web404monitor.git)
 ```
 FRONTEND SETUP
 

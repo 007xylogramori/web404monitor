@@ -4,15 +4,19 @@ const schema = new mongoose.Schema(
   {
     url: {
       type: String,
-      require: true,
+      required: true,
     },
     userId:{
         type: mongoose.Types.ObjectId,
-        require:true,
+        required:true,
         ref: "User"
     },
     isActive:{
         type:Boolean
+    },
+    isMonitoring:{
+      type:Boolean,
+      default:true,
     }
     
   },
