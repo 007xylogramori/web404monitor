@@ -1,4 +1,5 @@
 # Web-404-Monitor
+![image](https://github.com/user-attachments/assets/e631f01f-ae0c-4aa2-b1d8-d2278193fbc9)
 
 Web404Monitor is a hassle-free website monitoring system that allows you to effortlessly keep tabs on the health of your websites. Simply log the URLs of the websites you want to monitor, sit back, and let Web404Monitor do the rest. No more worrying about downtime – Web404Monitor has got your back!
 
